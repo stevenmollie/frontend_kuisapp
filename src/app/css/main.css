@@ -1,3 +1,8 @@
+body{
+    height: 100%;
+    /*background-image: url("../images/bgimage.jpg");*/
+
+}
 .header
 {
    text-align: center;
@@ -7,6 +12,8 @@
     padding-bottom: 1%;
     padding-top: 1%;
 }
+
+/*Menu css */
 .menu-bar
 {
     height: 100%;
@@ -25,19 +32,53 @@
 .menu-bar ul li{
     margin-left: 15px;
     width: 100%;
+    border-bottom: 1px solid gray;
 
 }
-
-
-
 .menu-bar ul li a{
     text-decoration: none;
 }
-
-.content_container{
-    margin-top: 3%;
-    height: 100%;
+.menu_footer{
+    position: fixed;
+    bottom:0px;
 }
+.menu_footer ul {
+    display: inline-block;
+    float: left;
+    list-style-type: none;
+    background-color: yellow;
+    width: 100%;
+
+}
+.menu_footer ul li{
+    display: inline;
+    margin:1%;
+}
+
+/*Conent container css*/
+.content_container{
+    height: 100%;
+    padding: 3%;
+}
+.profile_img{
+    height: 10%;
+    width:12%;
+    opacity: 0.6;
+}
+.member_container{
+    align-content: center;
+    text-align: center;
+}
+.member_container span{
+    display: block;
+
+}
+.task_container h4{
+    padding-bottom:1%;
+    border-bottom: 1px solid gray;
+}
+
+/*Chatbox css*/
 .chatbox_bar
 {
     border-left: 1px solid gray;
@@ -46,4 +87,13 @@
 }
 .send_message{
     bottom: 0px;
+    position: fixed;
+}
+.title{
+    margin-bottom: 15%;
+}
+.title span{
+    float: right;
+    position: relative;
+
 }
