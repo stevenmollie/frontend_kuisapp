@@ -1,0 +1,36 @@
+.background{
+    position: fixed;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/bgimage.jpg");
+    background-repeat: no-repeat;
+    opacity: 0.85;
+    filter: alpha(opacity=60);
+}
+.content_container{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+}
+.content_container h1{
+
+    font-size: 5.5em;
+
+    position: relative;
+    text-align: center;
+    margin-top: 10%;
+    color: ghostwhite;
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin-bottom: 5%;
+}
+.g-signin2
+{
+    display: inline-block;
+    margin-top: 15px;
+
+}
+.fb-login-button{
+    width: 400px;
+}
