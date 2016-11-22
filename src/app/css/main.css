@@ -1,6 +1,7 @@
 body{
     height: 100%;
     /*background-image: url("../images/bgimage.jpg");*/
+    overflow: hidden;
 
 }
 .header
@@ -16,9 +17,9 @@ body{
 /*Menu css */
 .menu-bar
 {
-    height: 100%;
+    height: 100vh;
     border-right : 1px solid gray;
-    min-height: 100%;
+
 
 
 }
@@ -32,7 +33,7 @@ body{
 .menu-bar ul li{
     margin-left: 15px;
     width: 100%;
-    border-bottom: 1px solid gray;
+    /*border-bottom: 1px solid gray;*/
 
 }
 .menu-bar ul li a{
@@ -40,20 +41,31 @@ body{
 }
 .menu_footer{
     position: fixed;
-    bottom:0px;
-}
-.menu_footer ul {
-    display: inline-block;
-    float: left;
-    list-style-type: none;
-    background-color: yellow;
-    width: 100%;
+    bottom: 0px;
+
+    margin-left: -1%;
+
 
 }
-.menu_footer ul li{
-    display: inline;
-    margin:1%;
+.menu_footer ul {
+    list-style-type: none;
+    width: auto;
+
+
+
+
 }
+.menu_footer ul li {
+    display: inline;
+    margin-left: 20%
+
+
+}
+.menu_footer .glyphicon{
+    font-size: 1.5em;
+}
+
+
 
 /*Conent container css*/
 .content_container{
@@ -81,8 +93,9 @@ body{
 /*Chatbox css*/
 .chatbox_bar
 {
+    height: 100vh;
     border-left: 1px solid gray;
-    background-color: yellow;
+
 
 }
 .send_message{
