@@ -85,9 +85,31 @@ body{
     display: block;
 
 }
-.task_container h4{
+.content_title{
     padding-bottom:1%;
     border-bottom: 1px solid gray;
+}
+.task{
+    width: auto;
+    border: 1px solid gray;
+    height: auto;
+    margin: 1%;
+}
+.task_content{
+    margin: 20px;
+}
+ .task_description , .task_enddate ,.task_points{
+    margin-left: 10%;
+}
+.task ul{
+    float: right;
+}
+.task ul li{
+    list-style-type: none;
+    display: inline;
+    font-size: 1.6em;
+    margin-right: 5px;
+
 }
 
 /*Chatbox css*/
