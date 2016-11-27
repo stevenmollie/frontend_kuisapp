@@ -1,8 +1,11 @@
 $primaryColor: #eeccff;
-
+$secondaryColor : #ffffff;
+$thirdcolor: #00ff00;
 body {
   $primaryColor: #ccc;
-  background: $primaryColor;
+  background: $thirdcolor;
+  transform-origin: center bottom;
+;
 }
 
 p {

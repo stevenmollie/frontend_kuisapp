@@ -11,17 +11,10 @@ var gulp = require('gulp'),
     csslint = require('gulp-csslint'),
     uglify = require('gulp-uglify'),
     notify = require('gulp-notify'),
-    concat = require('gulp-concat')
+    concat = require('gulp-concat'),
+    del = require('del'),
+    plumber = require('gulp-plumber');
 
-gulp.task('vet', function () {
-    gulp.src([
-        './src/**/*.js',
-        './*.js'
-    ])
-        .pipe($.jshint())
-        .pipe($.jshint.reporter('jshint-stylish',{verbose:true}))
-        .pipe($.jshint.reporter('fail'));
-});
 
 const PATHS = {
     EXTERNALS : {},
@@ -47,10 +40,16 @@ const AUTOPREFIXOPTIONS = {
     browsers: ['last 2 versions']
 };
 
-//CSS
-gulp.task("css",function () {
+//SASS --> CSS
+gulp.task("css",['clean-css'],function () {
 
     gulp.src(PATHS.SASS.SRC)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(sass())
         .pipe(sourcemaps.init())
         .pipe(autoprefixer(AUTOPREFIXOPTIONS))
@@ -63,4 +62,19 @@ gulp.task("css",function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(PATHS.SASS.DEST))
 })
+
+gulp.task('sass-watcher',function () {
+    gulp.watch(PATHS.SASS.SRC,["css"])
+})
+
+gulp.task('clean-css',function() {
+    var files = PATHS.SASS.DEST + '**/*.css';
+    clean(files);
+})
+
+
+function clean(path) {
+    console.log('Cleaning :' + util.colors.blue(path));
+    del(path);
+}
 
