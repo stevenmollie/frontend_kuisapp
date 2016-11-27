@@ -32,13 +32,23 @@ const PATHS = {
         LIB:"./app/lib/**/*.js",
         SRC:"./app/js/**/*.js",
         DEST:'./wwwroot/js'
+    },
+    TS:{
+        SRC:"./app/ts/**/*.ts",
+        DEST:"./app/js/**/*.js"
     }
+
 };
 
 const AUTOPREFIXOPTIONS = {
     browsers: ['last 2 versions']
 };
-
+gulp.task("default",function () {
+    var cssWatcher = gulp.watch(PATHS.SASS.SRC,['css']);
+    var HtmlWatcher = gulp.watch(PATHS.HTML.SRC,['html-validate']);
+    var jsWatcher = gulp.watch(PATHS.JS.SRC,['js']);
+    var libWatcher = gulp.watch(PATHS.JS.LIB,['lib']);
+})
 //SASS --> CSS
 gulp.task("css",['clean-css'],function () {
 
@@ -62,9 +72,6 @@ gulp.task("css",['clean-css'],function () {
         .pipe(gulp.dest(PATHS.SASS.DEST))
 });
 
-gulp.task('sass-watcher',function () {
-    gulp.watch(PATHS.SASS.SRC,["css"])
-});
 
 gulp.task('clean-css',function() {
     var files = PATHS.SASS.DEST + '**/*.css';
@@ -73,12 +80,25 @@ gulp.task('clean-css',function() {
 
 gulp.task('html-validate',function () {
     gulp.src(PATHS.HTML.SRC)
-        .pipe(htmlhint('.htmlhintrc'))
-        .pipe(htmlhint.reporter('htmlhint-stylish'))
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
+        // .pipe(htmlhint('./.htmlhintrc'))
+        // .pipe(htmlhint.reporter('htmlhint-stylish'))
         .pipe(htmlhint.failReporter())
 });
+
 gulp.task('lib',function () {
-    gulp.src(PATHS.LIB.SRC)
+    gulp.src(PATHS.JS.LIB)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(jshint())
         .pipe(jshint.reporter(jsStylish))
         .pipe(sourcemaps.init())
@@ -88,8 +108,15 @@ gulp.task('lib',function () {
         .pipe(gulp.dest(PATHS.JS.DEST))
         .pipe(notify({message:'lib built'}))
 });
+
 gulp.task('js',function () {
     gulp.src(PATHS.JS.SRC)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(jshint())
         .pipe(jshint.reporter(jsStylish))
         .pipe(sourcemaps.init())
@@ -100,7 +127,9 @@ gulp.task('js',function () {
         .pipe(notify({message:'js built'}))
 });
 
+gulp.task('ts', function () {
 
+})
 function clean(path) {
     console.log('Cleaning :' + util.colors.blue(path));
     del(path);
