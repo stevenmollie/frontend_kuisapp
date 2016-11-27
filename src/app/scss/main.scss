@@ -1,0 +1,12 @@
+$primaryColor: #eeccff;
+
+body {
+  $primaryColor: #ccc;
+  background: $primaryColor;
+}
+
+p {
+  color: $primaryColor;
+}
+
+// When compiled, our paragraph selector's color is #eeccff

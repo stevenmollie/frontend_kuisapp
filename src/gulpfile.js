@@ -29,6 +29,10 @@ const PATHS = {
         SRC : './app/css/**/*.css',
         DEST : './wwwroot/css'
     },
+    SASS:{
+        SRC : './app/scss/**/*.scss',
+        DEST : './wwwroot/css'
+    },
     HTML:{
         SRC : './app/**/*.html'
     },
@@ -39,11 +43,24 @@ const PATHS = {
     }
 };
 
+const AUTOPREFIXOPTIONS = {
+    browsers: ['last 2 versions']
+};
+
 //CSS
 gulp.task("css",function () {
 
-    gulp.src(PATHS.CSS.SRC)
+    gulp.src(PATHS.SASS.SRC)
+        .pipe(sass())
         .pipe(sourcemaps.init())
-        .pipe
+        .pipe(autoprefixer(AUTOPREFIXOPTIONS))
+        .pipe(csslint())
+        .pipe(concat("main.min.css"))
+        .pipe(cleanCSS({debug:true, compatiblitity:'*'},function (details) {
+            console.log(details.name + ": " + details.stats.originalSize)
+            console.log(details.name + ": " + details.stats.minifiedSize)
+    }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(PATHS.SASS.DEST))
 })
 
