@@ -12,7 +12,9 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     concat = require('gulp-concat'),
     del = require('del'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    ts = require('gulp-typescript'),
+    jsStylish=require("jshint-stylish");
 
 
 const PATHS = {
@@ -35,7 +37,7 @@ const PATHS = {
     },
     TS:{
         SRC:"./app/ts/**/*.ts",
-        DEST:"./app/js/**/*.js"
+        DEST:"./app/ts/js"
     }
 
 };
@@ -70,6 +72,7 @@ gulp.task("css",['clean-css'],function () {
     }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(PATHS.SASS.DEST))
+        .pipe(notify({message:'js built'}))
 });
 
 
@@ -128,8 +131,28 @@ gulp.task('js',function () {
 });
 
 gulp.task('ts', function () {
+    gulp.src(PATHS.TS.SRC)
+        .pipe(plumber({
+        errorHandler: function (err) {
+            console.log(err);
+            this.emit('end');
+        }
+    }))
+        .pipe(ts({
+            noImplicitAny:true,
+            out:'./js/main.js'
+        }))
+        .pipe(jshint())
+        .pipe(jshint.reporter(jsStylish))
+        .pipe(sourcemaps.init())
+        .pipe(concat("main.js"))
+        .pipe(sourcemaps.write())
+        .pipe(notify({message:'Sourcemaps write complete'}))
+        .pipe(gulp.dest(PATHS.TS.DEST))
+        .pipe(notify({message:'js built'}))
 
-})
+
+});
 function clean(path) {
     console.log('Cleaning :' + util.colors.blue(path));
     del(path);
