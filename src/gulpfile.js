@@ -32,7 +32,7 @@ const PATHS = {
     },
     JS:{
         LIB:"./app/lib/**/*.js",
-        SRC:"./app/js/**/*.js",
+        SRC:"./app/js/",
         DEST:'./wwwroot/js'
     },
     TS:{
