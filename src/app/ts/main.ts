@@ -13,6 +13,7 @@ class Snake extends Animal {
     move(distanceInMeters = 5) {
         console.log("Slithering...");
         super.move(distanceInMeters);
+
     }
 }
 
@@ -24,7 +25,7 @@ class Horse extends Animal {
     }
 }
 
-let sam = new Snake("Sammy the Python");
+let sam = new Snake("Sammy the snake");
 let tom: Animal = new Horse("Tommy the Palomino");
 
 sam.move();

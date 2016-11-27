@@ -37,7 +37,11 @@ const PATHS = {
     },
     TS:{
         SRC:"./app/ts/**/*.ts",
-        DEST:"./app/ts/js"
+        DEST:"./app/js"
+    },
+    TYPEJS:{
+        SRC:'./app/ts/js/**/*.js',
+        DEST: './wwwroot/js'
     }
 
 };
@@ -50,6 +54,7 @@ gulp.task("default",function () {
     var HtmlWatcher = gulp.watch(PATHS.HTML.SRC,['html-validate']);
     var jsWatcher = gulp.watch(PATHS.JS.SRC,['js']);
     var libWatcher = gulp.watch(PATHS.JS.LIB,['lib']);
+    var tsWatcher = gulp.watch(PATHS.TS.SRC,['ts']);
 })
 //SASS --> CSS
 gulp.task("css",['clean-css'],function () {
@@ -140,16 +145,14 @@ gulp.task('ts', function () {
     }))
         .pipe(ts({
             noImplicitAny:true,
-            out:'./js/main.js'
+
         }))
         .pipe(jshint())
         .pipe(jshint.reporter(jsStylish))
         .pipe(sourcemaps.init())
-        .pipe(concat("main.js"))
+        .pipe(concat("main_ts.js"))
         .pipe(sourcemaps.write())
-        .pipe(notify({message:'Sourcemaps write complete'}))
         .pipe(gulp.dest(PATHS.TS.DEST))
-        .pipe(notify({message:'js built'}))
 
 
 });
