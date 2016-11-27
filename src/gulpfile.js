@@ -3,7 +3,6 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),
     jscs = require('gulp-jscs'),
-    jsStylish = require('jshint-stylish'),
     util = require('gulp-util'),
     sass = require('gulp-sass'),
     cleanCSS = require('gulp-clean-css'),
@@ -61,16 +60,45 @@ gulp.task("css",['clean-css'],function () {
     }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(PATHS.SASS.DEST))
-})
+});
 
 gulp.task('sass-watcher',function () {
     gulp.watch(PATHS.SASS.SRC,["css"])
-})
+});
 
 gulp.task('clean-css',function() {
     var files = PATHS.SASS.DEST + '**/*.css';
     clean(files);
-})
+});
+
+gulp.task('html-validate',function () {
+    gulp.src(PATHS.HTML.SRC)
+        .pipe(htmlhint('.htmlhintrc'))
+        .pipe(htmlhint.reporter('htmlhint-stylish'))
+        .pipe(htmlhint.failReporter())
+});
+gulp.task('lib',function () {
+    gulp.src(PATHS.LIB.SRC)
+        .pipe(jshint())
+        .pipe(jshint.reporter(jsStylish))
+        .pipe(sourcemaps.init())
+        .pipe(concat("clnsg.min.js"))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(PATHS.JS.DEST))
+        .pipe(notify({message:'lib built'}))
+});
+gulp.task('js',function () {
+    gulp.src(PATHS.JS.SRC)
+        .pipe(jshint())
+        .pipe(jshint.reporter(jsStylish))
+        .pipe(sourcemaps.init())
+        .pipe(concat("app.min.js"))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(PATHS.JS.DEST))
+        .pipe(notify({message:'js built'}))
+});
 
 
 function clean(path) {
