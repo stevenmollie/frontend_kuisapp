@@ -75,8 +75,11 @@ export class User extends BaseModelClass{
         this._householdId = householdId;
     }
 
-    constructor(){
-
+    constructor(user:any){
+        super.name = user.displayName;
+        this._email = user.email;
+        this._imgSrc = user.photoURL;
+        this._uid = user.uid;
     }
 
 }
