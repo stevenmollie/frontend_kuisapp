@@ -34,7 +34,7 @@ var userSchema = new mongoose.Schema({
 //schema in model gieten
 var PUser = mongoose.model('PowerUsers', userSchema);
 
-//oude date verwijderen
+//oude data verwijderen
 PUser.remove({}, function(err) {
     if (err) {
         console.log ('error deleting old data.');
@@ -49,8 +49,6 @@ var johndoe = new PUser ({
 
 // in database opslaan
 johndoe.save(function (err) {if (err) console.log ('Error on save!')});
-
-// Creating more users manually
 
 //als browser eerder geladen is dan de connectie met de db
 var found = ['DB Connection not yet established.  Try again later.  Check the console output for error messages if this persists.'];
