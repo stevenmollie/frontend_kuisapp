@@ -1,11 +1,12 @@
 import {User} from "./User";
 import {Task} from "./Task";
+import {BaseModelClass} from "./BaseModelClass";
 /**
  * Created by steve on 30/11/2016.
  */
 
 
-export class Household{
+export class Household extends BaseModelClass{
     private _address: string;
 
     get address():string{
