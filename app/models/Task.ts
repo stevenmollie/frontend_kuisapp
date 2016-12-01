@@ -4,13 +4,13 @@ import {BaseModelClass} from "./BaseModelClass";
  */
 
 export class Task extends BaseModelClass{
-    private _dueDate: any;
+    private _dueDate: Date;
 
-    get dueDate(): any{
+    get dueDate(): Date{
         return this._dueDate;
     }
 
-    set dueDate(dueDate: any){
+    set dueDate(dueDate: Date){
         this._dueDate = dueDate;
     }
 
