@@ -13,10 +13,14 @@ import { Observable } from 'rxjs/Observable';
     selector: 'tasks-list',
     template: `
     <ul>
-    <li *ngFor="let task of tasks | async"
-      (click)="onSelect(task)">
-      <span>{{ task.id }}</span> {{ task.name }}
-    </li>
+    <!--<li *ngFor="let task of tasks | async"-->
+      <!--(click)="onSelect(task)">-->
+      <!--<span>{{ task.id }}</span> {{ task.name }}-->
+    <!--</li>-->
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+           
     </ul>
           `,
 })
