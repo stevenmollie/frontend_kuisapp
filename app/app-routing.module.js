@@ -13,9 +13,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var test_component_1 = require("./components/test.component");
+var home_component_1 = require("./components/home.component");
 var appRoutes = [
-    { path: 'test', component: test_component_1.TestComponent },
+    { path: 'home', component: home_component_1.HomeComponent },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
