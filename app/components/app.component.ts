@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
     template: `
     
     <h1>The Cleansing</h1>
-    
+    <a routerLink="/home" routerLinkActive="active">Home</a>
     <router-outlet></router-outlet>
           `
 })
